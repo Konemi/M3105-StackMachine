@@ -28,16 +28,20 @@ public class CPU
 	public final static int DUP		= 0x14;
 	public final static int POP		= 0x15;
 	
-	// TODO something is missing here...
+	private IO ioSystem;
+	private Memory programMemory;
+	private Stack expStack;
+	private Stack callStack;
 
 	public void run()
 	{
-		try
-		{
+//		try
+//		{
 			while (true)
 			{
 				// TODO something is missing here...
 
+				int opCode = programMemory.getStartAddress();
 				// System.err.print("@" + this.programCounter + ": ");
 				switch (opCode)
 				{
@@ -159,23 +163,52 @@ public class CPU
 					}
 				}
 			}
-		}
-		catch (AddressOutOfBoundsException e)
-		{
-			// TODO something is missing here...
-		}
-		catch (IOException e)
-		{
-			// TODO something is missing here...
-		}
-		catch (StackOverflowException e)
-		{
-			// TODO something is missing here...
-		}
-		catch (StackUnderflowException e)
-		{
-			// TODO something is missing here...
-		}		
+//		}
+//		catch (AddressOutOfBoundsException e)
+//		{
+//			// TODO something is missing here...
+//		}
+//		catch (IOException e)
+//		{
+//			// TODO something is missing here...
+//		}
+//		catch (StackOverflowException e)
+//		{
+//			// TODO something is missing here...
+//		}
+//		catch (StackUnderflowException e)
+//		{
+//			// TODO something is missing here...
+//		}		
+	}
+
+	public void wireToProgramMemory(Memory programMemory) {
+		this.programMemory = programMemory;		
+	}
+
+	public void wireToExpStack(Stack expStack) {
+		this.expStack = expStack;	
+		
+	}
+
+	public void wireToCallStack(Stack callStack) {
+		this.callStack = callStack;	
+		
+	}
+
+	public void wireToIoSubsystem(IO ioSystem) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void clearStacks() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void setPC(int address) {
+		// TODO Auto-generated method stub
+		
 	}
 
 	// TODO something is missing here...
