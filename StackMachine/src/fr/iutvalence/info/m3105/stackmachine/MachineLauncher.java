@@ -31,23 +31,23 @@ public class MachineLauncher
 		Instruction[] instructions = 
 				new Instruction[] 
 				{
-						new Instruction(CPU.IN, null),
-						new Instruction(CPU.CALL, new int[] {0x5}),
-						new Instruction(CPU.OUT, null),
-						new Instruction(CPU.HALT, null),
-						new Instruction(CPU.DUP, null),
-						new Instruction(CPU.JZ, new int[] {0xb}),
-						new Instruction(CPU.CALL, new int[] {0xf}),
-						new Instruction(CPU.RET, null),
-						new Instruction(CPU.POP, null),
-						new Instruction(CPU.PUSH, new int[] {0x1}),
-						new Instruction(CPU.RET, null),
-						new Instruction(CPU.DUP, null),
-						new Instruction(CPU.PUSH, new int[] {0x1}),
-						new Instruction(CPU.SUB, null),
-						new Instruction(CPU.CALL, new int[] {0x5}),
-						new Instruction(CPU.MUL, null),
-						new Instruction(CPU.RET, null)
+						new Instruction(CPU_specific.IN, null),
+						new Instruction(CPU_specific.CALL, new int[] {0x5}),
+						new Instruction(CPU_specific.OUT, null),
+						new Instruction(CPU_specific.HALT, null),
+						new Instruction(CPU_specific.DUP, null),
+						new Instruction(CPU_specific.JZ, new int[] {0xb}),
+						new Instruction(CPU_specific.CALL, new int[] {0xf}),
+						new Instruction(CPU_specific.RET, null),
+						new Instruction(CPU_specific.POP, null),
+						new Instruction(CPU_specific.PUSH, new int[] {0x1}),
+						new Instruction(CPU_specific.RET, null),
+						new Instruction(CPU_specific.DUP, null),
+						new Instruction(CPU_specific.PUSH, new int[] {0x1}),
+						new Instruction(CPU_specific.SUB, null),
+						new Instruction(CPU_specific.CALL, new int[] {0x5}),
+						new Instruction(CPU_specific.MUL, null),
+						new Instruction(CPU_specific.RET, null)
 				};
 		Program program = new Program(instructions);
 		
@@ -57,17 +57,17 @@ public class MachineLauncher
 
 		try
 		{
-			programMemory = new Memory(0x00000000, 0x00000020);
-			expStack = new Stack(16);
-			callStack = new Stack(16);
+			programMemory = new Memory_32bits(0x00000000, 0x00000020);
+			expStack = new Stack_32bits(16);
+			callStack = new Stack_32bits(16);
 		}
 		 catch (InvalidParameterException e)
 		{
 			// Safely ignore this error, which is not one
 		}
 		
-		IO ioSystem = new IO(System.in, System.out, System.err);
-		CPU cpu = new CPU();		
+		IO ioSystem = new IO_Standard(System.in, System.out, System.err);
+		CPU cpu = new CPU_specific();		
 		Machine machine = new Machine(cpu, programMemory, expStack, callStack, ioSystem );
 		try
 		{
